@@ -1,9 +1,11 @@
+import { describe, expect, test } from "vitest";
 import {
   calculateSummary,
   createTask,
   sortTasksByPriority,
-  toggleTask
-} from "../src/tasks.js";
+  toggleTask,
+  type StudyTask
+} from "../src/tasks";
 
 describe("task helpers", () => {
   test("creates a task with clean text and a default incomplete state", () => {
@@ -19,7 +21,7 @@ describe("task helpers", () => {
   });
 
   test("toggles the matching task without changing other tasks", () => {
-    const tasks = [
+    const tasks: StudyTask[] = [
       { id: 1, name: "Write test", priority: "High", completed: false },
       { id: 2, name: "Review PR", priority: "Medium", completed: false }
     ];
@@ -32,9 +34,9 @@ describe("task helpers", () => {
 
   test("calculates total, completed count, and progress percentage", () => {
     const summary = calculateSummary([
-      { id: 1, completed: true },
-      { id: 2, completed: false },
-      { id: 3, completed: true }
+      { completed: true },
+      { completed: false },
+      { completed: true }
     ]);
 
     expect(summary).toEqual({ total: 3, completed: 2, progress: 67 });
@@ -42,9 +44,9 @@ describe("task helpers", () => {
 
   test("sorts high priority tasks before medium and low tasks", () => {
     const sortedTasks = sortTasksByPriority([
-      { id: 1, priority: "Low" },
-      { id: 2, priority: "High" },
-      { id: 3, priority: "Medium" }
+      { id: 1, name: "Low item", priority: "Low", completed: false },
+      { id: 2, name: "High item", priority: "High", completed: false },
+      { id: 3, name: "Medium item", priority: "Medium", completed: false }
     ]);
 
     expect(sortedTasks.map((task) => task.priority)).toEqual(["High", "Medium", "Low"]);
