@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Sprint Planner</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Version Control + CI + QA</p>
+          <h1 id="page-title">Study Sprint Planner</h1>
+          <p class="intro">
+            A tiny classroom app for practicing professional software workflows with real code,
+            automated tests, linting, pull requests, and peer review.
+          </p>
+        </div>
+        <div class="hero-panel" aria-label="Project quality status">
+          <span class="status-dot"></span>
+          <strong>CI Ready</strong>
+          <p>Every push can run lint, tests, and a production build.</p>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Planner dashboard">
+        <article class="summary-card">
+          <span class="summary-label">Total Tasks</span>
+          <strong id="total-tasks">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Completed</span>
+          <strong id="completed-tasks">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Progress</span>
+          <strong id="progress-percent">0%</strong>
+        </article>
+      </section>
+
+      <section class="workspace" aria-label="Task workspace">
+        <form class="task-form" id="task-form">
+          <h2>Add a learning task</h2>
+          <label>
+            Task name
+            <input id="task-name" type="text" maxlength="60" placeholder="Example: Review Git branches" required />
+          </label>
+          <label>
+            Priority
+            <select id="task-priority">
+              <option value="High">High</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </label>
+          <button type="submit">Add Task</button>
+        </form>
+
+        <div class="task-list-panel">
+          <div class="panel-header">
+            <h2>Current sprint</h2>
+            <button id="reset-tasks" type="button">Reset Demo</button>
+          </div>
+          <ul id="task-list" class="task-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>

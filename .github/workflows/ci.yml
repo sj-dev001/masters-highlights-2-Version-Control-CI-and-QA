@@ -1,0 +1,40 @@
+name: Continuous Integration
+
+# Run this workflow when code is pushed or when a pull request is opened.
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  quality-checks:
+    name: Lint, Test, and Build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Download the repository code into the GitHub Actions runner.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Install Node.js so the runner can use npm, Jest, ESLint, and Vite.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # npm install downloads the project dependencies listed in package.json.
+      - name: Install dependencies
+        run: npm install
+
+      # ESLint catches common code quality problems before they reach main.
+      - name: Run linter
+        run: npm run lint
+
+      # Jest runs automated tests for the project logic.
+      - name: Run unit tests
+        run: npm test
+
+      # The build step proves the app can be packaged successfully.
+      - name: Verify production build
+        run: npm run build
