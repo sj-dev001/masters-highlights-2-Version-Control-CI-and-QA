@@ -1,8 +1,14 @@
 # Version Control, CI, and QA Student Project
 
-This project introduces high school students to practical software engineering workflows using Git, GitHub, Continuous Integration, GitHub Pages deployment, and basic Quality Assurance.
+This project introduces high school students to practical software engineering workflows using Git, GitHub, Continuous Integration, GitHub Pages deployment, automated testing, linting, type checking, and basic Quality Assurance.
 
-Students build and maintain a small **Study Sprint Planner**: a React + TypeScript app that tracks learning tasks, completion progress, and priority. The app is intentionally simple, visually polished with Tailwind CSS, and uses the same professional habits teams use in real projects.
+Students build and maintain a small **Study Sprint Planner**: a React + TypeScript app for planning a short learning sprint. The app lets learners add tasks, assign priorities, mark tasks complete, delete tasks, reset demo data, and view total, completed, and progress summary metrics. The codebase is intentionally compact, visually polished with Tailwind CSS, and structured so students can practice the same professional habits teams use in real projects.
+
+The aim is not only to make a working app. Students use the app as a shared codebase for practicing version control, pull requests, CI checks, QA documentation, and GitHub Pages deployment.
+
+## Live App
+
+https://sj-dev001.github.io/masters-highlights-2-Version-Control-CI-and-QA/
 
 ## Learning Goals
 
@@ -10,6 +16,7 @@ Students build and maintain a small **Study Sprint Planner**: a React + TypeScri
 - Collaborate through branches, pull requests, and peer review.
 - Run automated checks with GitHub Actions.
 - Write Vitest unit tests for important logic.
+- Use TypeScript checks to catch type errors before deployment.
 - Use ESLint to catch common TypeScript and React mistakes.
 - Deploy a production build to GitHub Pages.
 - Practice QA with checklists, reviews, and reports.
@@ -19,6 +26,7 @@ Students build and maintain a small **Study Sprint Planner**: a React + TypeScri
 ```text
 .
 ├── .github/workflows/ci.yml
+├── .gitignore
 ├── docs/
 │   ├── git-tutorial.md
 │   ├── qa-report.md
@@ -43,6 +51,14 @@ Students build and maintain a small **Study Sprint Planner**: a React + TypeScri
 └── README.md
 ```
 
+Key areas:
+
+- `src/App.tsx` contains the Study Sprint Planner interface and React state.
+- `src/tasks.ts` contains task data, summary calculations, sorting, creation, toggling, and deletion helpers.
+- `tests/tasks.test.ts` verifies the task helper behavior with Vitest.
+- `docs/` contains the student-facing Git, QA, screenshot, checklist, and reflection materials.
+- `.github/workflows/ci.yml` runs the quality checks and deploys the built site to GitHub Pages.
+
 ## Run the Project Locally
 
 Install Node.js first, then run:
@@ -63,6 +79,7 @@ http://localhost:5173
 ```bash
 npm test
 npm run lint
+npm run typecheck
 npm run build
 ```
 
@@ -168,6 +185,7 @@ The CI pipeline:
 - Installs Node.js.
 - Installs dependencies.
 - Runs ESLint.
+- Runs TypeScript type checks.
 - Runs Vitest tests.
 - Builds the app.
 - Deploys the `dist` folder to GitHub Pages after successful pushes to `main`.
