@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   calculateSummary,
   createTask,
+  deleteTask,
   sortTasksByPriority,
   toggleTask,
   type StudyTask
@@ -30,6 +31,19 @@ describe("task helpers", () => {
 
     expect(updatedTasks[0].completed).toBe(false);
     expect(updatedTasks[1].completed).toBe(true);
+  });
+
+  test("deletes the matching task and keeps the rest", () => {
+    const tasks: StudyTask[] = [
+      { id: 1, name: "Write test", priority: "High", completed: false },
+      { id: 2, name: "Review PR", priority: "Medium", completed: false },
+      { id: 3, name: "Push branch", priority: "Low", completed: false }
+    ];
+
+    const updatedTasks = deleteTask(tasks, 2);
+
+    expect(updatedTasks).toHaveLength(2);
+    expect(updatedTasks.map((task) => task.id)).toEqual([1, 3]);
   });
 
   test("calculates total, completed count, and progress percentage", () => {

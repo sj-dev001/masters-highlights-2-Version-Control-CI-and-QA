@@ -28,6 +28,7 @@ Study Sprint Planner
 - A user can add a task with a name and priority.
 - A user cannot add a task with fewer than 3 characters.
 - Checking a task updates the completed count.
+- Deleting a task removes it from the list and updates the totals.
 - Progress percentage updates correctly.
 - The reset button restores the starter tasks.
 - The layout remains readable on a phone-sized screen.

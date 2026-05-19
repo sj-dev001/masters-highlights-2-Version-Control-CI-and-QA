@@ -3,6 +3,7 @@ import {
   Priority,
   calculateSummary,
   createTask,
+  deleteTask,
   sortTasksByPriority,
   starterTasks,
   toggleTask
@@ -150,7 +151,7 @@ function App() {
           <ul className="mt-4 grid gap-3">
             {sortedTasks.map((task) => (
               <li
-                className="grid min-h-14 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3"
+                className="grid min-h-14 grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3"
                 key={task.id}
               >
                 <input
@@ -172,6 +173,14 @@ function App() {
                 >
                   {task.priority}
                 </span>
+                <button
+                  className="min-h-9 rounded-lg bg-red-50 px-3 py-1.5 text-sm font-extrabold text-red-700 transition hover:bg-red-100"
+                  type="button"
+                  aria-label={`Delete ${task.name}`}
+                  onClick={() => setTasks((currentTasks) => deleteTask(currentTasks, task.id))}
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>

@@ -40,6 +40,10 @@ export function toggleTask(tasks: StudyTask[], taskId: number): StudyTask[] {
   );
 }
 
+export function deleteTask(tasks: StudyTask[], taskId: number): StudyTask[] {
+  return tasks.filter((task) => task.id !== taskId);
+}
+
 export function calculateSummary(tasks: Pick<StudyTask, "completed">[]): TaskSummary {
   const total = tasks.length;
   const completed = tasks.filter((task) => task.completed).length;
