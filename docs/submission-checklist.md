@@ -30,6 +30,7 @@
 - [ ] `npm run dev` opened the app.
 - [ ] `npm test` passed.
 - [ ] `npm run lint` passed.
+- [ ] `npm run typecheck` passed.
 - [ ] `npm run build` passed.
 
 ## Final Academic Submission

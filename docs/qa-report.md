@@ -16,9 +16,10 @@ Study Sprint Planner
 | --- | --- | --- |
 | Unit tests | `npm test` | All Vitest tests pass |
 | Linter | `npm run lint` | No ESLint errors |
+| Type check | `npm run typecheck` | No TypeScript errors |
 | Build | `npm run build` | Production build completes |
 | Deploy | GitHub Actions | GitHub Pages deployment succeeds after push to `main` |
-| Full check | `npm run check` | Lint, tests, and build all pass |
+| Full check | `npm run check` | Lint, type check, tests, and build all pass |
 
 ## Manual QA Checklist
 

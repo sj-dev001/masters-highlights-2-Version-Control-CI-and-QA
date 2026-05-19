@@ -41,6 +41,10 @@ jobs:
       - name: Run linter
         run: npm run lint
 
+      # TypeScript checks that the app uses types correctly.
+      - name: Run TypeScript check
+        run: npm run typecheck
+
       # Vitest runs automated tests for the project logic.
       - name: Run unit tests
         run: npm test
