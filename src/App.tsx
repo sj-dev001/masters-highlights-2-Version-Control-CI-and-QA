@@ -10,6 +10,9 @@ import {
 } from "./tasks";
 
 const priorityOptions: Priority[] = ["High", "Medium", "Low"];
+const filterOptions = ["All", "Open", "Completed"] as const;
+
+type TaskFilter = (typeof filterOptions)[number];
 
 const priorityClasses: Record<Priority, string> = {
   High: "bg-red-100 text-red-800 ring-red-200",
@@ -21,8 +24,23 @@ function App() {
   const [tasks, setTasks] = useState(starterTasks);
   const [taskName, setTaskName] = useState("");
   const [priority, setPriority] = useState<Priority>("Medium");
+  const [filter, setFilter] = useState<TaskFilter>("All");
   const summary = useMemo(() => calculateSummary(tasks), [tasks]);
-  const sortedTasks = useMemo(() => sortTasksByPriority(tasks), [tasks]);
+  const sortedTasks = useMemo(() => {
+    const visibleTasks = tasks.filter((task) => {
+      if (filter === "Completed") {
+        return task.completed;
+      }
+
+      if (filter === "Open") {
+        return !task.completed;
+      }
+
+      return true;
+    });
+
+    return sortTasksByPriority(visibleTasks);
+  }, [filter, tasks]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -140,13 +158,32 @@ function App() {
         <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-lg shadow-slate-900/5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-xl font-extrabold text-slate-900">Current sprint</h2>
-            <button
-              className="min-h-11 rounded-lg bg-emerald-50 px-4 py-2 font-extrabold text-teal-800 transition hover:bg-emerald-100"
-              type="button"
-              onClick={() => setTasks(starterTasks)}
-            >
-              Reset Demo
-            </button>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <div className="grid grid-cols-3 rounded-lg border border-slate-200 bg-slate-50 p-1">
+                {filterOptions.map((option) => (
+                  <button
+                    className={`min-h-9 rounded-md px-3 text-sm font-extrabold transition ${
+                      filter === option
+                        ? "bg-teal-800 text-white shadow-sm"
+                        : "text-slate-600 hover:bg-white"
+                    }`}
+                    type="button"
+                    key={option}
+                    aria-pressed={filter === option}
+                    onClick={() => setFilter(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="min-h-11 rounded-lg bg-emerald-50 px-4 py-2 font-extrabold text-teal-800 transition hover:bg-emerald-100"
+                type="button"
+                onClick={() => setTasks(starterTasks)}
+              >
+                Reset Demo
+              </button>
+            </div>
           </div>
           <ul className="mt-4 grid gap-3">
             {sortedTasks.map((task) => (
