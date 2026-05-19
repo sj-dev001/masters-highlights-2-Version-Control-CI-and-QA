@@ -15,7 +15,7 @@ Include screenshots in the final submission to prove the project works.
 
 3. **Automated Tests Passing**
    - Run `npm test`.
-   - Capture the terminal showing all Jest tests passing.
+   - Capture the terminal showing all Vitest tests passing.
 
 4. **Linting Passing**
    - Run `npm run lint`.
@@ -26,7 +26,11 @@ Include screenshots in the final submission to prove the project works.
    - Go to the Actions tab.
    - Capture the green passing workflow result.
 
-6. **Pull Request Review**
+6. **GitHub Pages Deployment**
+   - Open the deployed GitHub Pages URL.
+   - Capture the live site in the browser.
+
+7. **Pull Request Review**
    - Open a sample pull request.
    - Capture a peer review comment and the CI status check.
 
@@ -39,4 +43,5 @@ Use clear names:
 - `tests-passing.png`
 - `lint-passing.png`
 - `github-actions-passing.png`
+- `github-pages-live-site.png`
 - `pull-request-review.png`

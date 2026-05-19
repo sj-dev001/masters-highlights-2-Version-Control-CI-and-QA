@@ -14,9 +14,10 @@ Study Sprint Planner
 
 | Check | Command | Expected Result |
 | --- | --- | --- |
-| Unit tests | `npm test` | All Jest tests pass |
+| Unit tests | `npm test` | All Vitest tests pass |
 | Linter | `npm run lint` | No ESLint errors |
 | Build | `npm run build` | Production build completes |
+| Deploy | GitHub Actions | GitHub Pages deployment succeeds after push to `main` |
 | Full check | `npm run check` | Lint, tests, and build all pass |
 
 ## Manual QA Checklist
@@ -29,6 +30,7 @@ Study Sprint Planner
 - Progress percentage updates correctly.
 - The reset button restores the starter tasks.
 - The layout remains readable on a phone-sized screen.
+- The deployed GitHub Pages URL loads the app correctly.
 
 ## Peer Review Simulation
 
@@ -51,4 +53,4 @@ Example review comments:
 
 ## QA Result
 
-The project is ready for academic demonstration when `npm run check` passes locally and the GitHub Actions workflow passes on GitHub.
+The project is ready for academic demonstration when `npm run check` passes locally, the GitHub Actions workflow passes on GitHub, and the GitHub Pages deployment opens successfully.

@@ -1,16 +1,17 @@
 # Version Control, CI, and QA Student Project
 
-This project introduces high school students to practical software engineering workflows using Git, GitHub, Continuous Integration, and basic Quality Assurance.
+This project introduces high school students to practical software engineering workflows using Git, GitHub, Continuous Integration, GitHub Pages deployment, and basic Quality Assurance.
 
-Students build and maintain a small **Study Sprint Planner**: a browser app that tracks learning tasks, completion progress, and priority. The app is intentionally simple, but it uses the same professional habits teams use in real projects.
+Students build and maintain a small **Study Sprint Planner**: a React + TypeScript app that tracks learning tasks, completion progress, and priority. The app is intentionally simple, visually polished with Tailwind CSS, and uses the same professional habits teams use in real projects.
 
 ## Learning Goals
 
 - Use Git to save project history with meaningful commits.
 - Collaborate through branches, pull requests, and peer review.
 - Run automated checks with GitHub Actions.
-- Write unit tests for important logic.
-- Use ESLint to catch common JavaScript mistakes.
+- Write Vitest unit tests for important logic.
+- Use ESLint to catch common TypeScript and React mistakes.
+- Deploy a production build to GitHub Pages.
 - Practice QA with checklists, reviews, and reports.
 
 ## Project Structure
@@ -25,14 +26,20 @@ Students build and maintain a small **Study Sprint Planner**: a browser app that
 │   ├── screenshots.md
 │   └── submission-checklist.md
 ├── src/
-│   ├── app.js
+│   ├── App.tsx
+│   ├── main.tsx
 │   ├── styles.css
-│   └── tasks.js
+│   └── tasks.ts
 ├── tests/
-│   └── tasks.test.js
+│   └── tasks.test.ts
 ├── eslint.config.js
 ├── index.html
 ├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
 └── README.md
 ```
 
@@ -78,7 +85,20 @@ git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
 git push -u origin main
 ```
 
-After pushing, open the repository on GitHub. The CI workflow should appear under the **Actions** tab.
+After pushing, open the repository on GitHub. The CI and deployment workflow should appear under the **Actions** tab.
+
+## GitHub Pages Setup
+
+This project is ready to deploy with GitHub Pages through GitHub Actions.
+
+1. Push the repository to GitHub.
+2. Open **Settings** in the GitHub repository.
+3. Go to **Pages**.
+4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+5. Push to `main`.
+6. Open the completed workflow run and copy the deployed site URL.
+
+The Vite config automatically uses the repository name as the base path when running in GitHub Actions.
 
 ## Suggested Branching Strategy
 
@@ -148,8 +168,9 @@ The CI pipeline:
 - Installs Node.js.
 - Installs dependencies.
 - Runs ESLint.
-- Runs Jest tests.
+- Runs Vitest tests.
 - Builds the app.
+- Deploys the `dist` folder to GitHub Pages after successful pushes to `main`.
 
 ## QA Materials
 
@@ -164,5 +185,4 @@ The CI pipeline:
 - Add local storage so tasks stay after refreshing.
 - Add task categories for different subjects.
 - Add accessibility checks to CI.
-- Add deployment to GitHub Pages.
 - Add coverage reports for tests.

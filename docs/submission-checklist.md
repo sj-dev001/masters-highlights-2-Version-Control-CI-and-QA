@@ -8,6 +8,8 @@
 - [ ] CI workflow file is included.
 - [ ] Unit tests are included.
 - [ ] ESLint configuration is included.
+- [ ] Tailwind CSS configuration is included.
+- [ ] GitHub Pages deployment workflow is included.
 - [ ] QA report is included.
 - [ ] Reflection report is 200-300 words.
 - [ ] Screenshot guide or screenshots are included.
@@ -19,6 +21,8 @@
 - [ ] At least one pull request was opened.
 - [ ] At least one peer review comment was added.
 - [ ] GitHub Actions passed.
+- [ ] GitHub Pages is configured to use GitHub Actions.
+- [ ] The deployed GitHub Pages URL works.
 
 ## Local Verification
 
@@ -31,6 +35,7 @@
 ## Final Academic Submission
 
 - [ ] Repository link is included.
+- [ ] Deployed site link is included.
 - [ ] Screenshots are included.
 - [ ] Reflection report is included.
 - [ ] QA report is included.

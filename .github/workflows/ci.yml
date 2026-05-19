@@ -27,7 +27,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # Install Node.js so the runner can use npm, Jest, ESLint, and Vite.
+      # Install Node.js so the runner can use npm, Vitest, ESLint, and Vite.
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -41,7 +41,7 @@ jobs:
       - name: Run linter
         run: npm run lint
 
-      # Jest runs automated tests for the project logic.
+      # Vitest runs automated tests for the project logic.
       - name: Run unit tests
         run: npm test
 
