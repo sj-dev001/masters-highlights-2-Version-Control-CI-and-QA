@@ -1,11 +1,21 @@
 name: Continuous Integration
 
-# Run this workflow when code is pushed or when a pull request is opened.
+# Run checks on pushes and pull requests, and allow a manual run from GitHub.
 on:
   push:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   quality-checks:
@@ -38,3 +48,46 @@ jobs:
       # The build step proves the app can be packaged successfully.
       - name: Verify production build
         run: npm run build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: quality-checks
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Download the repository code again for the deployment job.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Install Node.js for the Vite build.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Install dependencies before building the deployable site.
+      - name: Install dependencies
+        run: npm install
+
+      # Build the app into the dist folder.
+      - name: Build site
+        run: npm run build
+
+      # Prepare GitHub Pages for deployment.
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      # Upload the Vite dist folder as the Pages artifact.
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      # Publish the uploaded artifact to GitHub Pages.
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v4
